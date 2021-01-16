@@ -12,18 +12,53 @@ var chocolates = [
 ];
 
 //Progression 1: Add ___ chocolates of ____ color
-
+function addChocolates(chocolates, candy, count) {
+    if (count <= 0)
+        return "Number cannot be zero/negative"
+    for (let i = 0; i < count; i++)
+        chocolates.unshift(candy)
+    return chocolates
+}
 
 //Progression 2: Remove ___ chocolates from the top the dispenser
+
+function removeChocolates(chocolates, count) {
+    if (count > chocolates.length)
+        return "Insufficient chocolates in the dispenser"
+    else if (count < 0)
+        return "Number cannot be zero/negative"
+    return chocolates.splice(0, count)
+}
 
 
 //Progression 3: Dispense ___ chocolates
 
 
+function dispenseChocolates(chocolates, count) {
+    if (count > chocolates.length)
+        return "Insufficient chocolates in the dispenser"
+    else if (count < 0)
+        return "Number cannot be zero/negative"
+    return chocolates.splice(chocolates.length - count, chocolates.length).reverse()
+}
+
+
 //Progression 4: Dispense ___ chocolates of ____ color
 
 
+function dispenseChocolatesOfColor(chocolates, count, color) {
+    if (count > chocolates.length)
+        return "Insufficient chocolates in the dispenser"
+    else if (count < 0)
+        return "Number cannot be zero/negative"
+    return chocolates.reverse().splice(chocolates.indexOf(color),count)
+}
+
+
 //Progression 5: Display ___ chocolates of each color. Return array of numbers [green, silver, blue, crimson, purple, red, pink]
+
+
+
 
 
 //Progression 6: Sort chocolates based on count in each color. Return array of colors
