@@ -51,23 +51,92 @@ function dispenseChocolatesOfColor(chocolates, count, color) {
         return "Insufficient chocolates in the dispenser"
     else if (count < 0)
         return "Number cannot be zero/negative"
-    return chocolates.reverse().splice(chocolates.indexOf(color),count)
+    return chocolates.reverse().splice(chocolates.indexOf(color), count)
 }
 
 
 //Progression 5: Display ___ chocolates of each color. Return array of numbers [green, silver, blue, crimson, purple, red, pink]
 
-
+function noOfChocolates(chocolates) {
+    let object = {}
+    chocolates.map((chocolate) => {
+        object[chocolate] = chocolates.filter(function (value) {
+            return value === chocolate
+        }).length
+    })
+    return Object.values(object)
+}
 
 
 
 //Progression 6: Sort chocolates based on count in each color. Return array of colors
 
+function sortChocolateBasedOnCount(chocolates) {
+    let object = {}//object for the count of chocolates based on their occurence
+    chocolates.map((chocolate) => {
+        object[chocolate] = chocolates.filter(function (value) {
+            return value === chocolate
+        }).length
+    })
+
+    //sorting the object(choclate count object) in reverse order
+    const sortable = Object.fromEntries(
+        Object.entries(object).sort(([, a], [, b]) => b - a)
+    );
+    
+    //obtaining the sorted object(choclate count object) keys and values into the arrays
+    const sortableKeys = Object.keys(sortable)
+    const sortableValues = Object.values(sortable)
+    
+    //new array for the assigning the chocholates based on count
+    let array = []
+
+    //pushing chocolates into the array based on their count
+    for (let i = 0; i < sortableKeys.length; i++)
+        for (j = 0; j < sortableValues[i]; j++)
+            array.push(sortableKeys[i])
+
+    //assigning the array back to the chocolates
+    for (i = 0; i < array.length; i++)
+        chocolates[i] = array[i]
+
+}
 
 //Progression 7: Change ___ chocolates of ____ color to ____ color
 
+function changeChocolateColor(chocolates,count,colorToReplace,colorReplacedBy){
+    if(count<0)
+    return "Number cannot be zero/negative"
+    else if(colorToReplace===colorReplacedBy)
+    return "Can't replace the same chocolates";
+    for(let i=0;i<chocolates.length;i++){
+        if(chocolates[i]==colorToReplace&&count-->0)
+            chocolates[i]=colorReplacedBy
+    }
+    return chocolates
+}
 
 //Progression 8: Change all chocolates of ____ color to ____ color and return [countOfChangedColor, chocolates]
+function changeChocolateColorAllOfxCount(chocolates, colorToReplace, colorReplacedBy){
+    if(chocolates.length===0){
+        return [0,[]]
+    }else if(colorReplacedBy==colorToReplace){
+        return "Can't replace the same chocolates"
+    }
+    else{
+        var result=chocolates.map(data=>{
+            if(data===colorToReplace){
+                return data=colorReplacedBy;
+            }
+            return data;
+        });
+        count=0;
+        result.forEach(data=>{
+            if(data===colorReplacedBy) count++;
+        });
+    }
+    return[count,result]
+}
 
 
 //Challenge 1: Remove one chocolate of ____ color from the top
